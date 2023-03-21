@@ -9,12 +9,12 @@ export function Tasks(){
             <div>
                 <Info/>
             </div>
-            {/* <div>
-                <Empty/>
-            </div> */}
             <div>
-                <List/>
+                <Empty/>
             </div>
+            {/* <div>
+                <List/>
+            </div> */}
         </div>
     )
 }

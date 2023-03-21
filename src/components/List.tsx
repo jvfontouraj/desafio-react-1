@@ -3,10 +3,9 @@ import { Task } from './Task'
 
 export function List(){
     return(
-        <div>
+        <div className={styles.list}>
             <Task/>
-            <Task/>
-            <Task/>
+
         </div>
     )
 }

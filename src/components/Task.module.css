@@ -1,0 +1,78 @@
+.taskUnchecked, .taskChecked{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    background: var(--gray-500);
+    color: var(--gray-100);
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+    width: 46rem;
+    height: 4.5rem;
+    padding: 1rem;
+}
+
+.checkOff, .checkOn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid var(--blue);
+    border-radius: 9999px;
+    background: none;
+    transition: all 0.3s;
+}
+
+.checkOff img{
+    display: none;
+}
+
+.checkOff:hover{
+    background: var(--blue-dark);
+}
+
+.checkOn{
+    background: var(--purple-dark);
+    border: none;
+    color: var(--gray-300);
+}
+
+.checkOn:hover{
+    background: var(--purple);
+}
+
+.taskTextDone, .taskTextDefault{
+    width: 39.5rem;
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 140%
+}
+
+.taskTextDone{
+    color: var(--gray-300);
+    text-decoration-line: line-through
+}
+
+.taskTextDefault{
+    color: var(--gray-100);
+}
+
+.trashDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.trash{
+    size: 20;
+    color: var(--gray-300);
+    background: none;
+}
+
+.trash :hover{
+    color: var(--danger);
+    background: var(--gray-400);
+}
