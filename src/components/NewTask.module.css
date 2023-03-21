@@ -38,7 +38,7 @@ input::placeholder{
   transition: all 1s;
 }
 
-.createButton :hover{
+.createButton:hover{
   background: var(--blue);
 }
 
@@ -48,6 +48,7 @@ input::placeholder{
   font-weight: 700;
 }
 
-.createButton img{
-  padding-left: 0.5rem;
+.plus{
+  color: var(--gray-100);
+  margin-left: 0.5rem;
 }

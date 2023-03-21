@@ -5,7 +5,6 @@ export function List(){
     return(
         <div className={styles.list}>
             <Task/>
-
         </div>
     )
 }
