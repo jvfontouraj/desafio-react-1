@@ -1,34 +1,44 @@
 import styles from './Task.module.css'
 import {Trash, Check} from "phosphor-react"
+import { useState } from 'react';
 
 interface TaskProps{
-    content?: string;
+    content: string;
+    onDeleteTask: (deleteTask: string) => void;
 }
 
-export function Task({content}: TaskProps){
+
+export function Task({content, onDeleteTask}: TaskProps){
+
+    function handleDeleteTask(){
+        onDeleteTask(content)
+    }
+
+    const [checkClassName, setCheckClassName] = useState(true)
+
+    const [numberOfTasksCompleted, setNumberOfTasksCompleted] = useState(0)
+
+    function handleDisableCheck(){
+        setCheckClassName(state => !state);
+        !checkClassName ? setNumberOfTasksCompleted(numberOfTasksCompleted + 1) : setNumberOfTasksCompleted(numberOfTasksCompleted - 1);
+        console.log(numberOfTasksCompleted)
+    }  
+
     return(
         <div>
             <div className={styles.taskUnchecked}>
-                <div className={styles.checkOff}>
+                <button 
+                    onClick={handleDisableCheck} 
+                    className={checkClassName ? styles.checkOff : styles.checkOn}
+                >
                     <Check className={styles.check}/>
-                </div>
-                <p className={styles.taskTextDefault}>
+                </button>
+                <p className={checkClassName ? styles.taskTextDefault : styles.taskTextDone}>
                     {content}
                 </p>
-                <div className={styles.trashDiv}>
+                <button onClick={handleDeleteTask} className={styles.trashButton}>
                     <Trash className={styles.trash}/>
-                </div>
-            </div>
-            <div className={styles.taskChecked}>
-                <div className={styles.checkOn}>
-                    <Check className={styles.check}/>
-                </div>
-                <p className={styles.taskTextDone}>
-                    {content}
-                </p>
-                <div className={styles.trashDiv}>
-                    <Trash className={styles.trash}/>
-                </div>
+                </button>
             </div>
         </div>
     )
