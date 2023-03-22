@@ -23,6 +23,10 @@
     transition: all 0.3s;
 }
 
+.checkOff:focus, .checkOn:focus{
+    box-shadow: none;
+}
+
 .checkOn .check{
     size: 20;
     color: var(--gray-100);
@@ -63,21 +67,22 @@
     color: var(--gray-100);
 }
 
-.trashDiv{
+.trashButton{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.5rem;
-    height: 1.5rem;
+    border: none;
+    border-radius: 0.2rem;
+    background: var(--gray-500);
+    cursor: pointer;
 }
 
 .trash{
     box-sizing: content-box;
     color: var(--gray-300);
     padding: 0.315rem 0.375rem;
-    border-radius: 0.2rem;
-    background: none;
     transition: all 0.3s;
+    border-radius: 0.2rem;
 }
 
 .trash:hover{

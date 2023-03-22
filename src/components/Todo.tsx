@@ -5,18 +5,36 @@ import { Task } from './Task'
 
 export function Todo(){
 
-    const [tasks, setTasks] = useState([
-        'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.'
-    ])
+    const [tasks, setTasks] = useState([])
 
-    const [newTasks, setNewTasks] = useState([])
+    const [newTaskText, setNewTaskText] = useState('')
+
+    console.log(newTaskText)
 
     function handleCreateNewTask(){
-      console.log('oi')
-      event.preventDefault()
+        event.preventDefault()
   
-      setTasks([...tasks, tasks.length+1])
-      // setNewTaskText('')
+        const newTaskText = event.target.task.value
+
+        setTasks([...tasks, newTaskText])
+        setNewTaskText('')
+    }
+
+    function handleNewTaskChange(){
+        event.target.setCustomValidity('')
+        setNewTaskText(event.target.value)
+    }
+
+    function handleNewTaskInvalid(){
+        event.target.setCustomValidity('Essecampo é obrigatório!')
+    }
+    
+    function deleteTask(taskToDelete: string){
+        const tasksWithoutDeletedOne = tasks.filter(task =>{
+            return task !== taskToDelete
+        })
+
+        setTasks(tasksWithoutDeletedOne)
     }
 
     return(
@@ -26,9 +44,16 @@ export function Todo(){
                 <textarea
                     name='task'
                     placeholder='Adicione uma nova tarefa'
-                    
+                    value={newTaskText}
+                    onChange={handleNewTaskChange}
+                    onInvalid={handleNewTaskInvalid}
+                    required
                 />
-                <button type="submit" className={styles.createButton}>
+                <button 
+                    disabled={newTaskText.length === 0} 
+                    type="submit" 
+                    className={styles.createButton}
+                >
                     <span>Criar</span>
                     <PlusCircle className={styles.plus}/>
                 </button>
@@ -39,24 +64,27 @@ export function Todo(){
                 <div className={styles.info}>
                     <div className={styles.created}>
                         <p>Tarefas criadas</p>
-                        <span>0</span>
+                        <span>{tasks.length}</span>
                     </div>
                     <div className={styles.done}>
                         <p>Concluídas</p>
-                        <span>0</span>
+                        <span>{tasks.length === 0 ? 0 : ('1 de ' + tasks.length)}</span>
                     </div>
                 </div>
 
-                {/* <div className={styles.empty}>
+                <div className={tasks.length === 0 ? styles.empty : styles.displayNone}>
                     <Clipboard className={styles.clipboard}/>
                     <p className={styles.boldPar}>Você ainda não tem tarefas cadastradas</p>
                     <p className={styles.regularPar}>Crie tarefas e organize seus itens a fazer</p>
-                </div> */}
+                </div>
 
                 <div className={styles.list}>
                     {tasks.map(task =>{
                         return <Task
-                        content={task}/>
+                            content={task}
+                            key={task}
+                            onDeleteTask={deleteTask}
+                        />
                     })}
                 </div>
             </div>

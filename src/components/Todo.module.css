@@ -48,6 +48,7 @@ textarea::placeholder{
     border: none;
     background: var(--blue-dark);
     transition: all 1s;
+    cursor: pointer;
 }
   
 .createButton:hover{
@@ -105,6 +106,10 @@ textarea::placeholder{
 /* ///// */
 /* Empty */
 /* ///// */
+
+.displayNone{
+    display: none;
+}
 
 .empty{
     display: flex;
