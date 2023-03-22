@@ -1,15 +1,6 @@
 import { Header } from './components/Header'
-import { Tasks } from './components/Tasks'
-import { NewTask } from './components/NewTask'
+import { Todo } from './components/Todo'
 import './global.css'
-
-const tasks = [
-  {
-    id: 1,
-    content:" ",
-
-  }
-]
 
 export function App() {
   return (
@@ -18,16 +9,8 @@ export function App() {
         <Header/>
       </div>
       <div>
-        <NewTask/>
+        <Todo/>
       </div>
-      <div>
-        <Tasks/>
-      </div>
-      <main>
-        {tasks.map(task =>{
-          return <Tasks/>
-        })}
-      </main>
     </div>
   )
 }
