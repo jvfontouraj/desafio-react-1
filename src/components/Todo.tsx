@@ -9,8 +9,6 @@ export function Todo(){
 
     const [newTaskText, setNewTaskText] = useState('')
 
-    console.log(newTaskText)
-
     function handleCreateNewTask(){
         event.preventDefault()
   

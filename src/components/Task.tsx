@@ -16,12 +16,8 @@ export function Task({content, onDeleteTask}: TaskProps){
 
     const [checkClassName, setCheckClassName] = useState(true)
 
-    const [numberOfTasksCompleted, setNumberOfTasksCompleted] = useState(0)
-
     function handleDisableCheck(){
         setCheckClassName(state => !state);
-        !checkClassName ? setNumberOfTasksCompleted(numberOfTasksCompleted + 1) : setNumberOfTasksCompleted(numberOfTasksCompleted - 1);
-        console.log(numberOfTasksCompleted)
     }  
 
     return(
