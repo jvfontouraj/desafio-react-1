@@ -18,12 +18,12 @@ export function Todo(){
         setNewTaskText('')
     }
 
-    function handleNewTaskChange(event: ChangeEvent<HTMLTextAreaElement>){
+    function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>){
         event.target.setCustomValidity('')
         setNewTaskText(event.target.value)
     }
 
-    function handleNewTaskInvalid(event: InvalidEvent<HTMLTextAreaElement>){
+    function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>){
         event.target.setCustomValidity('Esse campo é obrigatório!')
     }
     
