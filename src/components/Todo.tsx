@@ -1,30 +1,30 @@
 import styles from './Todo.module.css'
 import { Clipboard, PlusCircle } from 'phosphor-react'
-import { useState } from 'react'
+import { ChangeEvent ,FormEvent, InvalidEvent, useState } from 'react'
 import { Task } from './Task'
 
 export function Todo(){
 
-    const [tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState(Array<string>)
 
     const [newTaskText, setNewTaskText] = useState('')
 
-    function handleCreateNewTask(){
+    const [doneTasks, setDoneTasks] = useState(0)
+
+    function handleCreateNewTask(event: FormEvent){
         event.preventDefault()
   
-        const newTaskText = event.target.task.value
-
         setTasks([...tasks, newTaskText])
         setNewTaskText('')
     }
 
-    function handleNewTaskChange(){
+    function handleNewTaskChange(event: ChangeEvent<HTMLTextAreaElement>){
         event.target.setCustomValidity('')
         setNewTaskText(event.target.value)
     }
 
-    function handleNewTaskInvalid(){
-        event.target.setCustomValidity('Essecampo é obrigatório!')
+    function handleNewTaskInvalid(event: InvalidEvent<HTMLTextAreaElement>){
+        event.target.setCustomValidity('Esse campo é obrigatório!')
     }
     
     function deleteTask(taskToDelete: string){
@@ -35,11 +35,16 @@ export function Todo(){
         setTasks(tasksWithoutDeletedOne)
     }
 
+    function handleToggleCheck(isChecked: boolean){
+        isChecked ? setDoneTasks(doneTasks + 1) : setDoneTasks(doneTasks - 1)
+    }
+
     return(
         <div>
             <div>
                 <form onSubmit={handleCreateNewTask} className={styles.newTask}>
-                <textarea
+                <input
+                    type="text"
                     name='task'
                     placeholder='Adicione uma nova tarefa'
                     value={newTaskText}
@@ -66,7 +71,7 @@ export function Todo(){
                     </div>
                     <div className={styles.done}>
                         <p>Concluídas</p>
-                        <span>{tasks.length === 0 ? 0 : ('1 de ' + tasks.length)}</span>
+                        <span>{tasks.length === 0 ? 0 : (`${doneTasks} de ${tasks.length}`)}</span>
                     </div>
                 </div>
 
@@ -82,6 +87,7 @@ export function Todo(){
                             content={task}
                             key={task}
                             onDeleteTask={deleteTask}
+                            onToggleCheck={handleToggleCheck}
                         />
                     })}
                 </div>

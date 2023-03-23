@@ -5,19 +5,22 @@ import { useState } from 'react';
 interface TaskProps{
     content: string;
     onDeleteTask: (deleteTask: string) => void;
+    onToggleCheck: (handleToggleCheck: boolean) => void;
 }
 
 
-export function Task({content, onDeleteTask}: TaskProps){
-
-    function handleDeleteTask(){
-        onDeleteTask(content)
-    }
+export function Task({content, onDeleteTask, onToggleCheck}: TaskProps){
 
     const [checkClassName, setCheckClassName] = useState(true)
 
+    function handleDeleteTask(){
+        onDeleteTask(content)
+        if (!checkClassName) onToggleCheck(checkClassName)
+    }
+
     function handleDisableCheck(){
         setCheckClassName(state => !state);
+        onToggleCheck(checkClassName)
     }  
 
     return(
@@ -25,7 +28,7 @@ export function Task({content, onDeleteTask}: TaskProps){
             <div className={styles.taskUnchecked}>
                 <button 
                     onClick={handleDisableCheck} 
-                    className={checkClassName ? styles.checkOff : styles.checkOn}
+                    className={checkClassName ? (styles.checkOff) : (styles.checkOn)}
                 >
                     <Check className={styles.check}/>
                 </button>
